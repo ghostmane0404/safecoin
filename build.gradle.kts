@@ -41,3 +41,22 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
         ),
     )
 }
+
+// Команды для CI
+tasks.register("detektAll") {
+    dependsOn(subprojects.map { "${it.path}:detekt" })
+    group = "verification"
+    description = "Run detekt on all modules"
+}
+
+tasks.register("lintAll") {
+    dependsOn(subprojects.map { "${it.path}:lintDebug" })
+    group = "verification"
+    description = "Run lint on all modules"
+}
+
+tasks.register("qualityChecks") {
+    dependsOn("detektAll", "lintAll")
+    group = "verification"
+    description = "Run all quality checks"
+}
