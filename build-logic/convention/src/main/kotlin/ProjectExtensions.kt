@@ -50,7 +50,7 @@ private fun Project.configureKotlin() {
                 "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
                 "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
                 // Для криптографии
-                "-opt-in=kotlin.ExperimentalStdlibApi"
+                "-opt-in=kotlin.ExperimentalStdlibApi",
             )
         }
     }

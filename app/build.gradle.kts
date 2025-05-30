@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.pluginConvention.application)
 }
 
-android{
+android {
     namespace = "com.almazbekov.safecoin"
 
     defaultConfig {
