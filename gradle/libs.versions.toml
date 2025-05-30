@@ -88,7 +88,6 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 
-
 [bundles]
 androidx-core = [
     "androidx-core-ktx",
@@ -136,7 +135,6 @@ testing = [
     "mockito-core",
     "kotlinx-coroutines-test"
 ]
-
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
