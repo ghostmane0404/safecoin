@@ -49,8 +49,9 @@ class ApplicationConventionPlugin : Plugin<Project> {
                 add("implementation", platform(bom))
                 add("implementation", libs.findBundle("compose").get())
                 add("debugImplementation", libs.findLibrary("androidx-ui-tooling").get())
+                add("implementation", libs.findLibrary("kotlinx-datetime").get())
                 add("coreLibraryDesugaring", "com.android.tools:desugar_jdk_libs:2.0.4")
-
+                add("testImplementation", libs.findBundle("testing").get())
                 // Test dependencies
                 add("androidTestImplementation", platform(bom))
             }

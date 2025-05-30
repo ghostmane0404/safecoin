@@ -34,6 +34,7 @@ class CommonConventionPlugin : Plugin<Project> {
             dependencies {
                 add("implementation", libs.findLibrary("kotlinx-datetime").get())
                 add("coreLibraryDesugaring", "com.android.tools:desugar_jdk_libs:2.0.4")
+                add("testImplementation", libs.findBundle("testing").get())
             }
         }
     }

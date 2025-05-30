@@ -30,6 +30,9 @@ timber = "5.0.1"
 
 detekt = "1.23.7"
 
+junit = "4.13.2"
+mockito = "5.7.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
@@ -81,6 +84,11 @@ detekt-gradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gr
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugar-jdk-libs" }
 
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+
+
 [bundles]
 androidx-core = [
     "androidx-core-ktx",
@@ -121,6 +129,12 @@ room = [
 security = [
     "androidx-biometric",
     "androidx-datastore-preferences"
+]
+
+testing = [
+    "junit",
+    "mockito-core",
+    "kotlinx-coroutines-test"
 ]
 
 
