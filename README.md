@@ -1,0 +1,2 @@
+# safecoin
+crypto project sample
