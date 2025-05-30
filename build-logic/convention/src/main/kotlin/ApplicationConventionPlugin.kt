@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
+import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -17,7 +18,11 @@ class ApplicationConventionPlugin : Plugin<Project> {
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
                 defaultConfig.targetSdk = 35
-
+                compileOptions {
+                    sourceCompatibility = JavaVersion.VERSION_17
+                    targetCompatibility = JavaVersion.VERSION_17
+                    isCoreLibraryDesugaringEnabled = true
+                }
                 buildFeatures {
                     compose = true
                 }
@@ -44,6 +49,7 @@ class ApplicationConventionPlugin : Plugin<Project> {
                 add("implementation", platform(bom))
                 add("implementation", libs.findBundle("compose").get())
                 add("debugImplementation", libs.findLibrary("androidx-ui-tooling").get())
+                add("coreLibraryDesugaring", "com.android.tools:desugar_jdk_libs:2.0.4")
 
                 // Test dependencies
                 add("androidTestImplementation", platform(bom))

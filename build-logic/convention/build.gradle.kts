@@ -20,24 +20,16 @@ dependencies {
 gradlePlugin {
     plugins {
         register("application") {
-            id = "buildlogic.application"
+            id = libs.plugins.pluginConvention.application.get().pluginId
             implementationClass = "ApplicationConventionPlugin"
         }
-        register("domain") {
-            id = "buildlogic.domain"
-            implementationClass = "DomainConventionPlugin"
-        }
         register("ui") {
-            id = "buildlogic.ui"
+            id = libs.plugins.pluginConvention.ui.get().pluginId
             implementationClass = "UiConventionPlugin"
         }
-        register("data") {
-            id = "buildlogic.data"
-            implementationClass = "DataConventionPlugin"
-        }
-        register("navigation") {
-            id = "buildlogic.navigation"
-            implementationClass = "NavigationConventionPlugin"
+        register("common") {
+            id = libs.plugins.pluginConvention.common.get().pluginId
+            implementationClass = "CommonConventionPlugin"
         }
     }
 }

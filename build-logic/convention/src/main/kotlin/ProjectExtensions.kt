@@ -1,9 +1,9 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
-import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.gradle.api.JavaVersion
 
 /**
  * Общая конфигурация для Android модулей
@@ -16,11 +16,41 @@ internal fun Project.configureKotlinAndroid(
 
         defaultConfig {
             minSdk = 24
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
 
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
+        lint {
+            lintConfig = file("${rootProject.projectDir}/lint.xml")
+            checkDependencies = true
+            ignoreTestSources = false
+            warningsAsErrors = true
+            showAll = true
+            checkReleaseBuilds = false
+        }
+
+        testOptions {
+            animationsDisabled = true
+            unitTests {
+                isIncludeAndroidResources = true
+                isReturnDefaultValues = true
+            }
+        }
+
+        buildTypes {
+            getByName("debug") {
+                // debug настройки
+            }
+
+            getByName("release") {
+                isMinifyEnabled = false
+                val proguardDir = project.file("proguard")
+                proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+                if (proguardDir.exists()) {
+                    proguardDir.listFiles()?.let { files ->
+                        proguardFiles(files.toList())
+                    }
+                }
+            }
         }
     }
 
@@ -44,14 +74,52 @@ private fun Project.configureKotlin() {
         kotlinOptions {
             jvmTarget = JavaVersion.VERSION_17.toString()
 
-            // Полезные флаги для крипто-кошелька
             freeCompilerArgs = freeCompilerArgs + listOf(
                 "-opt-in=kotlin.RequiresOptIn",
                 "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
                 "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
-                // Для криптографии
                 "-opt-in=kotlin.ExperimentalStdlibApi",
+                "-opt-in=kotlin.ExperimentalUnsignedTypes",
+                "-opt-in=kotlinx.serialization.ExperimentalSerializationApi",
+                "-Xjsr305=strict",
             )
+        }
+    }
+}
+
+/**
+ * Конфигурация Compose для UI модулей
+ */
+internal fun Project.configureCompose(
+    commonExtension: CommonExtension<*, *, *, *, *, *>,
+) {
+    commonExtension.apply {
+        buildFeatures {
+            compose = true
+        }
+
+        lint {
+            disable.add("UsingMaterialAndMaterial3Libraries")
+        }
+
+        buildTypes {
+            getByName("debug") {
+                println("Adding Compose compiler report destination for debug build in project ${project.name}")
+            }
+        }
+    }
+
+    // Compose compiler настройки
+    tasks.withType<KotlinCompile>().configureEach {
+        kotlinOptions {
+            val composeConfigFile = rootProject.file("compose_compiler_config.conf")
+            if (composeConfigFile.exists()) {
+                freeCompilerArgs += listOf(
+                    "-P",
+                    "plugin:androidx.compose.compiler.plugins.kotlin:stabilityConfigurationPath=" +
+                        composeConfigFile.absolutePath,
+                )
+            }
         }
     }
 }
