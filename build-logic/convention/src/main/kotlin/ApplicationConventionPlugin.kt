@@ -6,6 +6,7 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.api.artifacts.VersionCatalogsExtension
 
+@Suppress("LongMethod")
 class ApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
@@ -25,11 +26,54 @@ class ApplicationConventionPlugin : Plugin<Project> {
                 }
                 buildFeatures {
                     compose = true
+                    buildConfig = true
+                }
+
+                flavorDimensions += "environment"
+
+                productFlavors {
+                    create("dev") {
+                        dimension = "environment"
+                        applicationIdSuffix = ".dev"
+                        versionNameSuffix = "-dev"
+
+                        // API настройки для разработки
+                        buildConfigField("String", "API_BASE_URL", "\"https://api.sandbox.coinapi.io/v1/\"")
+
+                        // Название приложения
+                        resValue("string", "app_name", "SafeCoin Dev")
+
+                        // Манифест плейсхолдеры
+                        manifestPlaceholders["enableCrashReporting"] = false
+                    }
+
+                    create("prod") {
+                        dimension = "environment"
+
+                        // Продакшн API
+                        buildConfigField("String", "API_BASE_URL", "\"https://rest.coinapi.io/v1/\"")
+
+                        resValue("string", "app_name", "SafeCoin")
+                        manifestPlaceholders["enableCrashReporting"] = true
+                    }
                 }
 
                 buildTypes {
-                    release {
+                    getByName("debug") {
+                        isDebuggable = true
+                        applicationIdSuffix = ".debug"
+                        versionNameSuffix = "-debug"
+
+                        // Дополнительные debug настройки
+                        buildConfigField("boolean", "IS_DEBUG", "true")
+                    }
+                    getByName("release") {
                         isMinifyEnabled = true
+                        isShrinkResources = true
+                        isDebuggable = false
+
+                        buildConfigField("boolean", "IS_DEBUG", "false")
+
                         proguardFiles(
                             getDefaultProguardFile("proguard-android-optimize.txt"),
                             "proguard-rules.pro",

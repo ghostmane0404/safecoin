@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ '*' ]  # Все ветки при push
+    branches: [ '*' ]
   pull_request:
-    branches: [ '*' ]  # Все ветки при PR
+    branches: [ '*' ]
 
 jobs:
   detekt:
@@ -62,14 +62,14 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Run Lint
-        run: ./gradlew lintDebug
+      - name: Run Lint for Dev Debug
+        run: ./gradlew lintDevDebug
 
       - name: Upload Lint Reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: lint-reports-${{ github.run_number }}
+          name: lint-reports-dev-debug-${{ github.run_number }}
           path: |
             **/build/reports/lint-results*.html
             **/build/reports/lint-results*.xml
@@ -97,22 +97,37 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Run Unit Tests
-        run: ./gradlew testDebugUnitTest
+      - name: Run Unit Tests for Dev Debug
+        run: ./gradlew testDevDebugUnitTest
 
       - name: Upload Test Reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-reports-${{ github.run_number }}
+          name: test-reports-dev-debug-${{ github.run_number }}
           path: |
             **/build/reports/tests/
             **/build/test-results/
 
   build:
-    name: Build APK
+    name: Build APKs
     runs-on: ubuntu-latest
     needs: [detekt, lint, test]
+    strategy:
+      matrix:
+        include:
+          - flavor: Dev
+            buildType: Debug
+            variant: DevDebug
+          - flavor: Dev
+            buildType: Release
+            variant: DevRelease
+          - flavor: Prod
+            buildType: Debug
+            variant: ProdDebug
+          - flavor: Prod
+            buildType: Release
+            variant: ProdRelease
 
     steps:
       - name: Checkout code
@@ -127,14 +142,14 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug
+      - name: Build ${{ matrix.variant }} APK
+        run: ./gradlew assemble${{ matrix.variant }}
 
-      - name: Upload APK
+      - name: Upload ${{ matrix.variant }} APK
         uses: actions/upload-artifact@v4
         with:
-          name: debug-apk-${{ github.run_number }}
-          path: app/build/outputs/apk/debug/*.apk
+          name: apk-${{ matrix.variant }}-${{ github.run_number }}
+          path: app/build/outputs/apk/${{ matrix.flavor | lower }}/${{ matrix.buildType | lower }}/*.apk
 
   ci-success:
     name: CI Success
@@ -143,5 +158,14 @@ jobs:
     if: always()
 
     steps:
-      - name: Success
-        run: echo "🎉 All checks passed!"
+      - name: Check all jobs
+        run: |
+          if [[ "${{ needs.detekt.result }}" != "success" || 
+                "${{ needs.lint.result }}" != "success" || 
+                "${{ needs.test.result }}" != "success" || 
+                "${{ needs.build.result }}" != "success" ]]; then
+            echo "One or more jobs failed"
+            exit 1
+          else
+            echo "All CI jobs passed successfully!"
+          fi
