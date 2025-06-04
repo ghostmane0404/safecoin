@@ -119,15 +119,23 @@ jobs:
           - flavor: Dev
             buildType: Debug
             variant: DevDebug
+            flavorLower: dev
+            buildTypeLower: debug
           - flavor: Dev
             buildType: Release
             variant: DevRelease
+            flavorLower: dev
+            buildTypeLower: release
           - flavor: Prod
             buildType: Debug
             variant: ProdDebug
+            flavorLower: prod
+            buildTypeLower: debug
           - flavor: Prod
             buildType: Release
             variant: ProdRelease
+            flavorLower: prod
+            buildTypeLower: release
 
     steps:
       - name: Checkout code
@@ -149,7 +157,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: apk-${{ matrix.variant }}-${{ github.run_number }}
-          path: app/build/outputs/apk/${{ matrix.flavor | lower }}/${{ matrix.buildType | lower }}/*.apk
+          path: app/build/outputs/apk/${{ matrix.flavorLower }}/${{ matrix.buildTypeLower }}/*.apk
 
   ci-success:
     name: CI Success
