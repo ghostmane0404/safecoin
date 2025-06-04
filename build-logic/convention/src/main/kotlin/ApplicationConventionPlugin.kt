@@ -61,7 +61,6 @@ class ApplicationConventionPlugin : Plugin<Project> {
 
                 signingConfigs {
                     getByName("debug") {
-
                     }
                 }
 
