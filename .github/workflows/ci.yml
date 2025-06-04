@@ -110,7 +110,7 @@ jobs:
             **/build/test-results/
 
   build:
-    name: Build APKs
+    name: Build APK
     runs-on: ubuntu-latest
     needs: [detekt, lint, test]
     strategy:

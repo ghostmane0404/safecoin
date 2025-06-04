@@ -33,6 +33,11 @@ detekt = "1.23.7"
 junit = "4.13.2"
 mockito = "5.7.0"
 
+firebaseBom = "33.14.0"
+
+google-services = "4.4.2"
+crashlytics = "3.0.3"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
@@ -87,6 +92,9 @@ android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+firebase-bom = {group= "com.google.firebase", name="firebase-bom", version.ref = "firebaseBom"}
+firebase-analytics = {group= "com.google.firebase", name="firebase-analytics" }
+firebase-crashlytics = {group= "com.google.firebase", name="firebase-crashlytics" }
 
 [bundles]
 androidx-core = [
@@ -146,6 +154,8 @@ kotlin-parcelize = { id = "kotlin-parcelize", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services"}
+crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics"}
 
 pluginConvention-application = { id  = "buildlogic.application"}
 pluginConvention-common = { id  = "buildlogic.common"}
