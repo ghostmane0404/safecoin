@@ -229,10 +229,13 @@ jobs:
           echo "Commit: ${{ github.sha }}" >> release-notes.txt
           echo "Build: #${{ github.run_number }}" >> release-notes.txt
 
+      - name: Create Firebase Service Account file
+        run: echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}' > firebase-service-account.json
+
       - name: Deploy to Firebase App Distribution
         run: ./gradlew appDistributionUploadDevRelease
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          GOOGLE_APPLICATION_CREDENTIALS: firebase-service-account.json
 
   ci-success:
     name: CI Success
