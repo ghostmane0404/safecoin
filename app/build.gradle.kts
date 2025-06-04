@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.pluginConvention.application)
+    alias(libs.plugins.firebase.app.distribution)
 }
 
 android {

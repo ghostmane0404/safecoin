@@ -37,6 +37,7 @@ firebaseBom = "33.14.0"
 
 google-services = "4.4.2"
 crashlytics = "3.0.3"
+firebase-app-distribution = "5.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -95,6 +96,10 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 firebase-bom = {group= "com.google.firebase", name="firebase-bom", version.ref = "firebaseBom"}
 firebase-analytics = {group= "com.google.firebase", name="firebase-analytics" }
 firebase-crashlytics = {group= "com.google.firebase", name="firebase-crashlytics" }
+google-services-gradlePlugin = { group = "com.google.gms", name = "google-services", version.ref = "google-services" }  # ← ДОБАВИТЬ ЕСЛИ НЕТ
+firebase-appdistribution-gradlePlugin = { group = "com.google.firebase", name = "firebase-appdistribution-gradle", version.ref = "firebase-app-distribution" }  # ← ДОБАВИТЬ
+firebase-app-distribution = { group = "com.google.firebase", name = "firebase-appdistribution" }
+
 
 [bundles]
 androidx-core = [
@@ -156,6 +161,7 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services"}
 crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics"}
+firebase-app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-app-distribution" }
 
 pluginConvention-application = { id  = "buildlogic.application"}
 pluginConvention-common = { id  = "buildlogic.common"}

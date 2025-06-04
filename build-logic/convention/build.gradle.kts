@@ -15,6 +15,8 @@ dependencies {
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.hilt.gradlePlugin)
     compileOnly(libs.detekt.gradlePlugin)
+    compileOnly(libs.google.services.gradlePlugin)
+    compileOnly(libs.firebase.appdistribution.gradlePlugin)
 }
 
 gradlePlugin {
