@@ -59,14 +59,21 @@ class ApplicationConventionPlugin : Plugin<Project> {
                     }
                 }
 
+                signingConfigs {
+                    getByName("debug") {
+
+                    }
+                }
+
                 buildTypes {
                     getByName("debug") {
                         isDebuggable = true
-
+                        signingConfig = signingConfigs.getByName("debug")
                         // Дополнительные debug настройки
                         buildConfigField("boolean", "IS_DEBUG", "true")
                     }
                     getByName("release") {
+                        signingConfig = signingConfigs.getByName("debug")
                         isMinifyEnabled = true
                         isShrinkResources = true
                         isDebuggable = false
