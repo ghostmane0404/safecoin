@@ -7,6 +7,7 @@ lifecycleRuntimeKtx = "2.9.0"
 #compose
 activityCompose = "1.10.1"
 composeBom = "2025.05.01"
+composeRuntime = "1.8.2"
 
 #date and desugaring
 kotlinx-datetime = "0.6.0"
@@ -45,6 +46,7 @@ firebaseBom = "33.14.0"
 google-services = "4.4.2"
 crashlytics = "3.0.3"
 firebase-app-distribution = "5.1.0"
+jetbrainsKotlinJvm = "2.0.21"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,6 +58,7 @@ androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "composeRuntime" }
 
 #navigation
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
@@ -71,7 +74,7 @@ retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", vers
 retrofit2-converter-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
 okhttp3-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
-kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 
 #persistent
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -144,7 +147,7 @@ network = [
     "retrofit2-converter-kotlinx-serialization",
     "okhttp3-okhttp",
     "okhttp3-logging-interceptor",
-    "kotlinx-coroutines-android"
+    "kotlinx-coroutines"
 ]
 
 room = [
@@ -180,3 +183,4 @@ firebase-app-distribution = { id = "com.google.firebase.appdistribution", versio
 pluginConvention-application = { id  = "buildlogic.application"}
 pluginConvention-common = { id  = "buildlogic.common"}
 pluginConvention-ui = { id  = "buildlogic.ui"}
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
