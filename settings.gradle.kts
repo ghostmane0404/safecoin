@@ -22,3 +22,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "SafeCoin"
 include(":app")
+include(":udf")
+include(":udfcompose")
+include(":core")
+include(":coreui")

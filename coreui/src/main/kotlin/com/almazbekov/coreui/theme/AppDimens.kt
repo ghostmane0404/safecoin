@@ -1,0 +1,52 @@
+package com.almazbekov.coreui.theme
+
+import androidx.compose.runtime.Immutable
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+
+@Immutable
+data class AppDimens(
+    val size0: Dp = 0.dp,
+    val sizeQuarter: Dp = 1.dp,
+    val sizeHalf: Dp = 2.dp,
+    val size1: Dp = 4.dp,
+    val size1Half: Dp = 6.dp,
+    val size2: Dp = 8.dp,
+    val size2Half: Dp = 10.dp,
+    val size3: Dp = 12.dp,
+    val size3Half: Dp = 14.dp,
+    val size4: Dp = 16.dp,
+    val size5: Dp = 20.dp,
+    val size6: Dp = 24.dp,
+    val size7: Dp = 28.dp,
+    val size8: Dp = 32.dp,
+    val size9: Dp = 36.dp,
+    val size10: Dp = 40.dp,
+    val size11: Dp = 44.dp,
+    val size12: Dp = 48.dp,
+    val size13: Dp = 52.dp,
+    val size14: Dp = 56.dp,
+    val size15: Dp = 60.dp,
+    val size16: Dp = 64.dp,
+    val size17: Dp = 68.dp,
+    val size18: Dp = 72.dp,
+    val size19: Dp = 76.dp,
+    val size20: Dp = 80.dp,
+    val size21: Dp = 84.dp,
+    val size22: Dp = 88.dp,
+    val size23: Dp = 92.dp,
+    val size24: Dp = 96.dp,
+    val size25: Dp = 100.dp,
+    val size30: Dp = 120.dp,
+    val size35: Dp = 140.dp,
+    val size40: Dp = 160.dp,
+    val size43: Dp = 172.dp,
+    val size44: Dp = 176.dp,
+    val size48: Dp = 192.dp,
+    val size50: Dp = 200.dp,
+    val size55: Dp = 220.dp,
+    val size57: Dp = 228.dp,
+    val size62: Dp = 248.dp,
+    val size65: Dp = 260.dp,
+    val size90: Dp = 360.dp,
+)
