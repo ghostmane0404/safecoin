@@ -3,35 +3,50 @@ agp = "8.10.1"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
 lifecycleRuntimeKtx = "2.9.0"
+
+#compose
 activityCompose = "1.10.1"
 composeBom = "2025.05.01"
+composeRuntime = "1.8.2"
 
+#date and desugaring
 kotlinx-datetime = "0.6.0"
 desugar-jdk-libs = "2.0.4"
 
+#di and navigation
 composeNavigation = "2.9.0"
 kotlinxSerialization = "1.7.1"
 hilt = "2.48"
 hiltNavigationCompose = "1.2.0"
 
+#requests
 retrofit = "2.11.0"
 okhttp = "4.12.0"
 kotlinxCoroutines = "1.10.2"
 
+#persistent
 room = "2.7.1"
-
 biometric = "1.1.0"
 datastore = "1.1.7"
 
+#image loading
 coil = "2.7.0"
 lottie = "6.2.0"
 
+#tools
 timber = "5.0.1"
-
 detekt = "1.23.7"
 
+#tests
 junit = "4.13.2"
 mockito = "5.7.0"
+
+#services
+firebaseBom = "33.14.0"
+google-services = "4.4.2"
+crashlytics = "3.0.3"
+firebase-app-distribution = "5.1.0"
+jetbrainsKotlinJvm = "2.0.21"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,7 +58,9 @@ androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "composeRuntime" }
 
+#navigation
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
@@ -57,8 +74,9 @@ retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", vers
 retrofit2-converter-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
 okhttp3-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
-kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 
+#persistent
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
@@ -67,6 +85,7 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 androidx-biometric = { group = "androidx.biometric", name = "biometric", version.ref = "biometric" }
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 
+#image loading
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
 
@@ -81,12 +100,23 @@ kotlinx-serialization-gradlePlugin = { group = "org.jetbrains.kotlin", name = "k
 hilt-gradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
 detekt-gradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 
+#datetime and desugaring
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugar-jdk-libs" }
 
+#tests
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+
+#services
+firebase-bom = {group= "com.google.firebase", name="firebase-bom", version.ref = "firebaseBom"}
+firebase-analytics = {group= "com.google.firebase", name="firebase-analytics" }
+firebase-crashlytics = {group= "com.google.firebase", name="firebase-crashlytics" }
+google-services-gradlePlugin = { group = "com.google.gms", name = "google-services", version.ref = "google-services" }  # ← ДОБАВИТЬ ЕСЛИ НЕТ
+firebase-appdistribution-gradlePlugin = { group = "com.google.firebase", name = "firebase-appdistribution-gradle", version.ref = "firebase-app-distribution" }  # ← ДОБАВИТЬ
+firebase-app-distribution = { group = "com.google.firebase", name = "firebase-appdistribution" }
+
 
 [bundles]
 androidx-core = [
@@ -117,7 +147,7 @@ network = [
     "retrofit2-converter-kotlinx-serialization",
     "okhttp3-okhttp",
     "okhttp3-logging-interceptor",
-    "kotlinx-coroutines-android"
+    "kotlinx-coroutines"
 ]
 
 room = [
@@ -146,7 +176,11 @@ kotlin-parcelize = { id = "kotlin-parcelize", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services"}
+crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics"}
+firebase-app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "firebase-app-distribution" }
 
 pluginConvention-application = { id  = "buildlogic.application"}
 pluginConvention-common = { id  = "buildlogic.common"}
 pluginConvention-ui = { id  = "buildlogic.ui"}
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
