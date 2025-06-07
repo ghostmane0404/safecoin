@@ -13,4 +13,5 @@ android {
 
 dependencies {
     implementation(libs.bundles.compose)
+    implementation(project(":ui_contracts"))
 }
