@@ -22,7 +22,7 @@ firebaseAppDistribution {
     releaseNotesFile = "release-notes.txt" // или serviceCredentialsFile
 }
 
-fun dependencies() {
-    // Все основные зависимости уже включены в buildlogic.application
-    // Добавляйте сюда только специфичные для app зависимости
+dependencies {
+    implementation(project(":coreui"))
+    implementation(project(":ui_contracts"))
 }
