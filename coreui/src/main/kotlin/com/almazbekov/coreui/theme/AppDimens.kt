@@ -49,4 +49,5 @@ data class AppDimens(
     val size62: Dp = 248.dp,
     val size65: Dp = 260.dp,
     val size90: Dp = 360.dp,
+    val buttonStroke: Dp = 1.5.dp,
 )
