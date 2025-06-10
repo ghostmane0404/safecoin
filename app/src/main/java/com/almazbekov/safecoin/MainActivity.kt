@@ -1,10 +1,12 @@
 package com.almazbekov.safecoin
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,6 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import com.almazbekov.coreui.R
 import com.almazbekov.coreui.components.button.default.ButtonStyle
 import com.almazbekov.coreui.components.button.default.DefaultButton
@@ -27,26 +32,47 @@ import com.almazbekov.coreui.components.button.rounded.RoundedButton
 import com.almazbekov.coreui.components.button.rounded.RoundedButtonStyle
 import com.almazbekov.coreui.components.input.TextInput
 import com.almazbekov.coreui.theme.AppTheme
-import com.almazbekov.safecoin.ui.theme.SafeCoinTheme
 import com.almazbekov.ui.contracts.ButtonState
 import com.almazbekov.ui.contracts.InputState
 import com.almazbekov.ui.contracts.InputStatus
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+    companion object {
+        private const val SPLASH_ANIMATION_DURATION = 1200L
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val splash = installSplashScreen()
+        configureSplashScreen(splash)
         setContent {
             AppTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize().background(AppTheme.colors.backgroundPrimary),
-                ) { innerPadding ->
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding),
                     )
                 }
             }
+        }
+    }
+
+    private fun configureSplashScreen(splashScreen: SplashScreen) {
+        var keepSplashOnScreen = true
+
+        splashScreen.setKeepOnScreenCondition { keepSplashOnScreen }
+
+        lifecycleScope.launch {
+            delay(SPLASH_ANIMATION_DURATION)
+            keepSplashOnScreen = false
+        }
+
+        splashScreen.setOnExitAnimationListener { splashScreenViewProvider ->
+            splashScreenViewProvider.remove()
         }
     }
 }
@@ -113,7 +139,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    SafeCoinTheme {
+    AppTheme {
         Greeting("Android")
     }
 }

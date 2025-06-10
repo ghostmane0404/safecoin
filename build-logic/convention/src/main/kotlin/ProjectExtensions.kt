@@ -1,9 +1,10 @@
+
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
+import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.gradle.api.JavaVersion
 
 /**
  * Общая конфигурация для Android модулей
@@ -15,7 +16,7 @@ internal fun Project.configureKotlinAndroid(
         compileSdk = 35
 
         defaultConfig {
-            minSdk = 24
+            minSdk = 26
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
 

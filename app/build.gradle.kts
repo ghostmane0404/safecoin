@@ -23,6 +23,7 @@ firebaseAppDistribution {
 }
 
 dependencies {
+    implementation(libs.androidx.splashScreen)
     implementation(project(":coreui"))
     implementation(project(":ui_contracts"))
 }
