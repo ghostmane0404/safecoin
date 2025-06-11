@@ -15,12 +15,21 @@ import com.almazbekov.bottom.tab.BottomNavItem
 import com.almazbekov.bottom.tab.BottomNavigationBar
 import com.almazbekov.coreui.R
 import com.almazbekov.coreui.theme.AppTheme
+import com.almazbekov.main.controller.MainAction
+import com.almazbekov.main.controller.MainEvent
+import com.almazbekov.main.controller.MainState
 import com.almazbekov.navigation.BottomBarDestination
+import com.almazbekov.navigation.WelcomeDestination
 import com.almazbekov.navigation.util.Destination
+import com.almazbekov.udfcompose.JetpackStatefulStore
+import com.almazbekov.welcome.ui.WelcomeScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+typealias MainStore = JetpackStatefulStore<MainAction, MainState, MainEvent>
+
+@Suppress("LongMethod")
 @Composable
-fun ActivityContentElement(backStack: NavBackStack) {
+fun MainContentElement(backStack: NavBackStack, mainViewModel: MainViewModel) {
     val bottomNavItems = listOf(
         BottomNavItem(
             route = BottomBarDestination.Discover,
@@ -39,6 +48,8 @@ fun ActivityContentElement(backStack: NavBackStack) {
     val shouldShowBottomBar = currentRoute is BottomBarDestination
     val systemUiController = rememberSystemUiController()
     val backgroundColor = AppTheme.colors.backgroundPrimary
+
+    EventHandler(backStack = backStack, eventDispatcher = mainViewModel.store.eventDispatcher)
 
     SideEffect {
         systemUiController.setSystemBarsColor(
@@ -74,6 +85,10 @@ fun ActivityContentElement(backStack: NavBackStack) {
 
                     is BottomBarDestination.Profile -> NavEntry(route) {
                         Text("Settings", color = AppTheme.colors.textPrimary)
+                    }
+
+                    is WelcomeDestination -> NavEntry(route) {
+                        WelcomeScreen()
                     }
 
                     else -> NavEntry(route) {}

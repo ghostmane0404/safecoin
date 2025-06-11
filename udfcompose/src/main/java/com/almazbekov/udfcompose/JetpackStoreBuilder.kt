@@ -23,6 +23,6 @@ fun <A : Action, S : State, E : Event> jetpackStoreBuilder(
 
 class BuilderScope<A : Action, S : State, E : Event> {
     lateinit var stateObservable: JetpackStateObservable<S>
-    var eventDispatcher = FlowEventDispatcher<E>()
+    lateinit var eventDispatcher: FlowEventDispatcher<E>
     var sideEffects = SideEffects.Builder<A>()
 }

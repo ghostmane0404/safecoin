@@ -1,7 +1,6 @@
 [versions]
 agp = "8.10.1"
 kotlin = "2.0.20"
-ksp = "2.0.21-1.0.25"
 coreKtx = "1.16.0"
 lifecycleRuntimeKtx = "2.9.0"
 
@@ -19,9 +18,8 @@ kotlinx-datetime = "0.6.0"
 desugar-jdk-libs = "2.0.4"
 
 #di and navigation
+koin = "4.1.0"
 kotlinxSerialization = "1.7.1"
-hilt = "2.56.2"
-hiltNavigationCompose = "1.2.0"
 navigation3RuntimeAndroid = "1.0.0-alpha03"
 
 #requests
@@ -74,12 +72,8 @@ accompanist-systemuicontroller = { group = "com.google.accompanist", name = "acc
 #navigation
 androidx-navigation3-runtime-android = { group = "androidx.navigation3", name = "navigation3-runtime-android", version.ref = "navigation3RuntimeAndroid" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
-androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
-
-# DI (Dependency Injection)
-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
-
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 
 # Network (API для получения курсов криптовалют)
 retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
@@ -109,7 +103,6 @@ android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", ver
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 compose-gradlePlugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlinx-serialization-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-serialization", version.ref = "kotlin" }
-hilt-gradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
 detekt-gradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 
 #datetime and desugaring
@@ -148,7 +141,6 @@ compose = [
 
 navigation = [
     "androidx-navigation3-runtime-android",
-    "androidx-hilt-navigation-compose",
     "kotlinx-serialization-json",
 ]
 
@@ -176,6 +168,11 @@ testing = [
     "kotlinx-coroutines-test"
 ]
 
+koin = [
+    "koin-android",
+    "koin-androidx-compose"
+]
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -183,8 +180,6 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-parcelize = { id = "kotlin-parcelize", version.ref = "kotlin" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services"}
 crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics"}

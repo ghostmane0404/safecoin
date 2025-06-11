@@ -5,25 +5,15 @@ import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import com.almazbekov.navigation.BottomBarDestination
 import com.almazbekov.navigation.util.Navigator
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
 object NavigationModule {
-
-    @Provides
-    @Singleton
-    fun provideNavBackStack(): NavBackStack {
-        return mutableStateListOf<NavKey>(BottomBarDestination.Discover)
-    }
-
-    @Provides
-    @Singleton
-    fun provideNavigator(backStack: NavBackStack): Navigator {
-        return NavigatorImpl(backStack)
+    val module = module {
+        single<NavBackStack> {
+            mutableStateListOf<NavKey>(BottomBarDestination.Discover)
+        }
+        single<Navigator> {
+            NavigatorImpl(backStack = get())
+        }
     }
 }

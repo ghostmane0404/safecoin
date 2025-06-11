@@ -4,8 +4,6 @@ plugins {
     alias(libs.plugins.pluginConvention.application)
     alias(libs.plugins.firebase.app.distribution)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
 }
 
 android {
@@ -26,17 +24,25 @@ firebaseAppDistribution {
 }
 
 dependencies {
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
     implementation(libs.androidx.splashScreen)
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.compose)
     implementation(libs.androidx.navigation3.ui.android)
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.androidx.material3.android)
+    implementation(libs.bundles.koin)
 
     implementation(project(":coreui"))
+    implementation(project(":core"))
+    implementation(project(":core_android"))
     implementation(project(":ui_contracts"))
     implementation(project(":navigation"))
     implementation(project(":bottom_tab"))
+    implementation(project(":udf"))
+    implementation(project(":udfcompose"))
+    implementation(project(":main:controller"))
+    implementation(project(":welcome:welcome_data"))
+    implementation(project(":welcome:welcome_domain"))
+    implementation(project(":welcome:welcome_ui"))
+    implementation(project(":welcome:welcome_controller"))
 }

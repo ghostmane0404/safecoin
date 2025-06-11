@@ -2,7 +2,6 @@ package com.almazbekov.safecoin.main
 
 import android.os.Build
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
@@ -12,25 +11,17 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation3.runtime.NavBackStack
 import com.almazbekov.coreui.theme.AppTheme
-import com.almazbekov.navigation.util.Navigator
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.androidx.scope.ScopeActivity
 
-@AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : ScopeActivity() {
     companion object {
         private const val SPLASH_ANIMATION_DURATION = 1200L
     }
 
-    @Inject
-    lateinit var navigator: Navigator
-
-    @Inject
-    lateinit var backStack: NavBackStack
+    private val viewModel: MainViewModel by scope.inject()
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +32,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    ActivityContentElement(backStack)
+                    MainContentElement(viewModel.backStack, viewModel)
                 }
             }
         }
